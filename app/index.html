@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+<title>AngularJS Form Validation</title>
+<script src="https://code.angularjs.org/1.2.16/angular.js">
+	
+</script>
+<script type="text/javascript">
+	angular.module('myApp', []).controller('UserController', function($scope) {
+		$scope.user = {};
+		$scope.saveUser = function() {
+			if($scope.myform.$valid)
+			console.log('saving user'); // save $scope.user object
+			else
+			console.log('Unable to save. Validation error!');
+			}
+
+	});
+</script>
+<style>
+.error-message {
+	color: red;
+}
+
+input.ng-dirty.ng-invalid {
+	border-color: red;
+}
+</style>
+</head>
+
+<body ng-controller="UserController">
+	<form name="myform" ng-submit="saveUser()"
+	 novalidate >
+		First Name: <input type="text" name="firstname"
+			ng-model="user.firstname" ng-required="true" ng-minlength="2" /> <span
+			class="error-message"
+			ng-show="myform.firstname.$dirty
+&& myform.firstname.$error.required">The
+			First Name is Mandatory </span> <span class="error-message"
+			ng-show="myform.firstname.$dirty
+&& myform.firstname.$error.minlength">The
+			First Name should be minimum 2 characters</span> <br />Last Name : <input
+			type="text" name="lastname" ng-model="user.lastname"
+			ng-required="true" ng-minlength="2" /> <span class="error-message"
+			ng-show="myform.lastname.$dirty
+&& myform.lastname.$error.required">The
+			Last Name is Mandatory </span> <span class="error-message"
+			ng-show="myform.lastname.$dirty
+&& myform.lastname.$error.minlength">The
+			Last Name should be minimum 2 characters</span> <br />Phone No. : <input
+			type="text" name="phoneNumber" ng-model="user.phoneNumber"
+			ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" /> <span
+			class="error-message"
+			ng-show="myform.phoneNumber.$dirty
+&& myform.phoneNumber.$invalid">The
+			phone number field should be of 10 digits</span> <br />
+			
+			<input type="submit" value="Save"/>
+			
+	</form>
+</body>
+</html>
+
+
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers.js"></script>
+
+<script src="js/directives.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/services.js"></script>
+<script src="modules/posts/postModule.js"></script>
+<script src="modules/posts/js/controllers.js"></script>
+<script src="modules/posts/js/filters.js"></script>
+<script src="modules/posts/js/directives.js"></script>
+<script src="modules/posts/js/services.js"></script>
+</html>
